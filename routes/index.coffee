@@ -17,7 +17,7 @@ exports.project = (req, res) ->
     upPath = path.normalize(UPLOAD_BASEPATH + project);
     console.log(upPath)
     if not path.existsSync(upPath)
-      res.render('index',{title:project, images:[]})
+      res.render('project', {title:project, images:[]})
     else
       fs.readdir(upPath, (error, files) ->
         images = []
@@ -25,7 +25,7 @@ exports.project = (req, res) ->
           if name.indexOf(".") != 0
             images.push "upload/#{project}/#{name}"
         console.log("files:#{images}")
-        res.render('index',{title:project, images:images})
+        res.render('project', {title:project, images:images})
       )
 
 
