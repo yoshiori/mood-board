@@ -1,0 +1,31 @@
+h1=title
+.container-fluid
+  
+  .row
+    for path in images
+      img(src="#{path}",width="156px", height="156px")
+        
+  hr
+  p
+   form.well(method="post", enctype="multipart/form-data")
+     input(type="file", name="upfile")
+     input.btn(type="submit", value="Upload")
+  hr
+  if images.length > 0
+    #myCarousel.carousel
+      .carousel-inner
+        for path, i in images
+          if i == 0
+            .item.active
+              img(src="#{path}")
+          else
+            .item
+              img(src="#{path}")
+          
+      a.carousel-control.left(href="#myCarousel", data-slide="prev") &lsaquo;
+      a.carousel-control.right(href="#myCarousel", data-slide="next") &rsaquo;      
+
+script(type="text/javascript")
+  $(document).ready(function(){
+    $('.carousel').carousel();
+  });
