@@ -2,30 +2,38 @@ h1=title
 .container-fluid
   
   .row
-    for path in images
-      img(src="#{path}",width="156px", height="156px")
-        
+    for path, i in images
+      a(data-toggle="modal", href="#myModal_#{i}")
+        img(src="#{path}",width="156px", height="156px")
+    for path, i in images
+      .modal.hide.fade(id="myModal_#{i}")
+        .modal-header
+          button.close(data-dismiss="modal") x
+          h3 image
+        .modal-body
+          p
+            img(src="#{path}")
+        .modal-footer
+          a.btn.btn-danger(href="#",id="delete_#{i}",delete-target="#{path}") Delete
   hr
   p
    form.well(method="post", enctype="multipart/form-data")
      input(type="file", name="upfile")
      input.btn(type="submit", value="Upload")
   hr
-  if images.length > 0
-    #myCarousel.carousel
-      .carousel-inner
-        for path, i in images
-          if i == 0
-            .item.active
-              img(src="#{path}")
-          else
-            .item
-              img(src="#{path}")
-          
-      a.carousel-control.left(href="#myCarousel", data-slide="prev") &lsaquo;
-      a.carousel-control.right(href="#myCarousel", data-slide="next") &rsaquo;      
-
-script(type="text/javascript")
-  $(document).ready(function(){
-    $('.carousel').carousel();
-  });
+  script(type="text/javascript")
+    $(document).ready(function(){
+      $('[id^=delete_]').click(function(){
+        var delete_target = $(this).attr("delete-target");
+        var url = location.pathname;
+        $.ajax({
+          type:"delete",
+          data:"target=" + delete_target,
+          url:url,
+          success:function(msg){
+            console.log("success");
+            location.reload();
+          }
+        });
+      });
+    });
