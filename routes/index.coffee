@@ -7,6 +7,24 @@ path = require('path')
 
 UPLOAD_BASEPATH = './public/upload/'
 
+exports.index = (req,res) ->
+  fs.readdir(UPLOAD_BASEPATH, (error, files) ->
+    projects = []
+    for name in files
+      projectPath = path.normalize(path.join(UPLOAD_BASEPATH,name))
+      console.log(projectPath)
+      if fs.lstatSync(projectPath).isDirectory()
+        count = fs.readdirSync(projectPath).length
+        href = "/#{encodeURI(name)}"
+        projects.push {name:name, count:count, href:href}
+    console.log(projects)
+    res.render("index", {title:"", projects:projects})
+  )
+
+exports.move = (req,res) ->
+  project = req.body.project
+  res.redirect("/#{project}")
+
 exports.project = (req, res) ->
   project = req.params.project
   console.log("project:#{project}")
@@ -17,7 +35,7 @@ exports.project = (req, res) ->
     upPath = path.normalize(UPLOAD_BASEPATH + project);
     console.log(upPath)
     if not path.existsSync(upPath)
-      res.render('index',{title:project, images:[]})
+      res.render('project', {title:project, images:[]})
     else
       fs.readdir(upPath, (error, files) ->
         images = []
@@ -25,7 +43,7 @@ exports.project = (req, res) ->
           if name.indexOf(".") != 0
             images.push "upload/#{project}/#{name}"
         console.log("files:#{images}")
-        res.render('index',{title:project, images:images})
+        res.render('project', {title:project, images:images})
       )
 
 

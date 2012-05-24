@@ -3,8 +3,9 @@ doctype 5
 html(lang="ja")
   head
     title Mood Board #{title}
-    link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')
-    link(rel="stylesheet", href='/stylesheets/bootstrap-responsive.css')
+    link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+    link(rel="stylesheet", href="/stylesheets/bootstrap-responsive.css")
+    link(rel="stylesheet", href="/stylesheets/docs.css")
     script(type="text/javascript", src="js/jquery.min.js")
     script(type="text/javascript", src="js/coffee-script.js")
     style
@@ -15,12 +16,13 @@ html(lang="ja")
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          span.brand Mood Board
+          a(href="/")
+            span.brand Mood Board
     .container!=body
       hr
       footer
         p
-          a.btn(href="mailto:yoshiori_shoji@dwango.co.jp")
-            i.icon-envelope
-            |  yoshiori_shoji@dwango.co.jp
+          a.btn(href="http://twitter.com/yoshiori")
+            i.icon-fire
+            |  @yoshiori
     script(type="text/javascript", src="js/bootstrap.min.js")
