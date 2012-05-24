@@ -1,0 +1,7 @@
+form.well.form-search(method="post", enctype="multipart/form-data")
+  input.input-medium.search-query(type="text", name="project")
+  button.btn(type="submit") create or move
+.row
+  for project in projects
+    .span3
+      a.btn.btn-info(href="#{project.href}") #{project.name} (#{project.count})

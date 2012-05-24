@@ -11,7 +11,7 @@ app.configure(->
     app.use(app.router)
     app.use(express.static(__dirname + '/public'))
     app.use(express.favicon())
-    app.use(express.bodyParser({uploadDir: '/upload'}));
+    app.use(express.bodyParser({uploadDir: '/upload'}))
 )
 
 app.configure('development', ->
@@ -21,13 +21,15 @@ app.configure('development', ->
 )
 
 app.configure('production', ->
-  app.use(express.errorHandler());
+  app.use(express.errorHandler())
 )
 
 app.get('/:project', routes.project)
-app.post('/:project', routes.upload);
-app.delete('/:project', routes.del);
+app.post('/:project', routes.upload)
+app.delete('/:project', routes.del)
+app.get('/', routes.index)
+app.post('/', routes.move)
 
 app.listen(3001, ->
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env)
 )
