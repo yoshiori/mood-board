@@ -3,15 +3,15 @@ Mood Board
 Mood Board server
 
 
-info
+Info
 --------
 this app use node.js, npm, coffee-script
 
 Usage:
 --------
-    git clone git@github.com:yoshiori/mood-board.git
-    cd mood-board/
-    npm install
-    coffee app.coffee    
+    > git clone git@github.com:yoshiori/mood-board.git
+    > cd mood-board/
+    > npm install
+    > coffee app.coffee    
 
 open http://localhost:3001/
